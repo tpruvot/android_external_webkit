@@ -89,11 +89,13 @@ static const char gVideoVertexShader[] =
     "}\n";
 
 static const char gVideoFragmentShader[] =
-    "#extension GL_OES_EGL_image_external : require\n"
-    "precision mediump float;\n"
 #ifdef MISSING_EGL_EXTERNAL_IMAGE
+    "#extension GL_OES_EGL_image_external : enable\n"
+    "precision mediump float;\n"
     "uniform sampler2D s_yuvTexture;\n"
 #else
+    "#extension GL_OES_EGL_image_external : require\n"
+    "precision mediump float;\n"
     "uniform samplerExternalOES s_yuvTexture;\n"
 #endif
     "varying vec2 v_texCoord;\n"
@@ -102,7 +104,11 @@ static const char gVideoFragmentShader[] =
     "}\n";
 
 static const char gSurfaceTextureOESFragmentShader[] =
+#ifdef MISSING_EGL_EXTERNAL_IMAGE
+    "#extension GL_OES_EGL_image_external : enable\n"
+#else
     "#extension GL_OES_EGL_image_external : require\n"
+#endif
     "precision mediump float;\n"
     "varying vec2 v_texCoord; \n"
     "uniform float alpha; \n"
@@ -117,7 +123,11 @@ static const char gSurfaceTextureOESFragmentShader[] =
     "}\n";
 
 static const char gSurfaceTextureOESFragmentShaderInverted[] =
+#ifdef MISSING_EGL_EXTERNAL_IMAGE
+    "#extension GL_OES_EGL_image_external : enable\n"
+#else
     "#extension GL_OES_EGL_image_external : require\n"
+#endif
     "precision mediump float;\n"
     "varying vec2 v_texCoord; \n"
     "uniform float alpha; \n"
